@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomLinearLayout">
+        <attr name="customBackgroundColor" format="color" />
+        <!-- 다른 속성을 추가할 수 있습니다 -->
+    </declare-styleable>
+</resources>

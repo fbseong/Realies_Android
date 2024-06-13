@@ -23,4 +23,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Realies_Android"
 include(":app")
- 
+include(":util:navigation")

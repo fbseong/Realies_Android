@@ -30,7 +30,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>(
 
     protected val TAG = this.javaClass.simpleName
 
-    lateinit var navData: List<NavData>
+//    lateinit var navData: List<NavData>
 
     protected open fun preLoad() {}
     protected abstract fun start()
@@ -91,35 +91,35 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>(
         window.statusBarColor = ContextCompat.getColor(this, color)
     }
 
-    fun setNavigation(fragmentContainer: Int, navList: List<NavData>) {
-        navList[0].navButton.isActivated = true
-        val navHost = supportFragmentManager.findFragmentById(fragmentContainer) as NavHostFragment
-
-        navData = navList
-        navData.map { nav ->
-            nav.navButton.setOnClickListener {
-                navData.map { nav ->
-                    nav.navButton.isActivated = false
-                }
-                nav.navButton.isActivated = true
-                navHost.findNavController().navigate(nav.destinationFragment)
-
-            }
-        }
-    }
+//    fun setNavigation(fragmentContainer: Int, navList: List<NavData>) {
+//        navList[0].navButton.isActivated = true
+//        val navHost = supportFragmentManager.findFragmentById(fragmentContainer) as NavHostFragment
+//
+//        navData = navList
+//        navData.map { nav ->
+//            nav.navButton.setOnClickListener {
+//                navData.map { nav ->
+//                    nav.navButton.isActivated = false
+//                }
+//                nav.navButton.isActivated = true
+//                navHost.findNavController().navigate(nav.destinationFragment)
+//
+//            }
+//        }
+//    }
 
     fun handleNavigationBarColor(color: Int) {
         window.navigationBarColor = ContextCompat.getColor(this, color)
     }
 
-    data class NavData(
-        val navButton: View, val destinationFragment: Int
-    )
+//    data class NavData(
+//        val navButton: View, val destinationFragment: Int
+//    )
 
     fun setNavId(navId: Int) {
-        navData.map { navData ->
-            navData.navButton.isActivated = navId == navData.destinationFragment
-        }
+//        navData.map { navData ->
+//            navData.navButton.isActivated = navId == navData.destinationFragment
+//        }
     }
 
     open fun handleBottomNavigationVisibility(state: Boolean) {

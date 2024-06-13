@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomNavigationItem">
+        <attr name="itemText" format="string" />
+        <attr name="itemIcon" format="reference" />
+
+        <attr name="itemIconTint" format="color" />
+        <attr name="itemTextTint" format="color" />
+        <attr name="itemTextTintClicked" format="color" />
+        <attr name="itemIconTintClicked" format="color" />
+
+        <attr name="isClicked" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="BottomNavigationBar">
+        <attr name="barTopLineColor" format="color" />
+        <attr name="barBackground" format="color" />
+    </declare-styleable>
+
+</resources>

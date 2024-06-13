@@ -21,6 +21,7 @@ class RealiesFragment :
             adapter = newsThumbAdapter
             layoutManager = newsThumbLayoutManager
         }
+
         val newsThumbModel = NewsThumbModel(
             title = "Realies 출시하자마자 파산 위기",
             thumbImage = "",

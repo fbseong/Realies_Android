@@ -10,4 +10,8 @@
         tools:layout="@layout/fragment_realies"
         android:name="com.selfpro.realies.feature.main.realies.RealiesFragment"
         android:label="RealiesFragment" />
+    <fragment
+        android:id="@+id/myFragment"
+        android:name="com.selfpro.realies.feature.main.my.MyFragment"
+        android:label="MyFragment" />
 </navigation>
