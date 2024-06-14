@@ -7,11 +7,12 @@
 
     <fragment
         android:id="@+id/realiesFragment"
-        tools:layout="@layout/fragment_realies"
         android:name="com.selfpro.realies.feature.main.realies.RealiesFragment"
-        android:label="RealiesFragment" />
+        android:label="RealiesFragment"
+        tools:layout="@layout/fragment_realies" />
     <fragment
         android:id="@+id/myFragment"
         android:name="com.selfpro.realies.feature.main.my.MyFragment"
-        android:label="MyFragment" />
+        android:label="MyFragment"
+        tools:layout="@layout/fragment_my" />
 </navigation>

@@ -13,10 +13,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
         extendEdgeToEdge(R.id.main)
 
         binding.bnMain.navigationRoute = NavigationRoute(
-            this, R.id.nav_host_fragment, listOf(
-                NavData(binding.niRealies, R.id.realiesFragment)
+            this,
+            R.id.nav_host_fragment,
+            listOf(
+                NavData(binding.niRealies, R.id.realiesFragment),
+                NavData(binding.niMy, R.id.myFragment)
             )
         )
-        supportFragmentManager
     }
 }

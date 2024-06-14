@@ -42,7 +42,8 @@ class BottomNavigationItem @JvmOverloads constructor(
             itemTextTint = getColor(R.styleable.BottomNavigationItem_itemTextTint, Color.BLACK)
             itemIconTint = getColor(R.styleable.BottomNavigationItem_itemIconTint, -1)
 
-            itemTextTintClicked = getColor(R.styleable.BottomNavigationItem_itemTextTintClicked, Color.BLACK)
+            itemTextTintClicked =
+                getColor(R.styleable.BottomNavigationItem_itemTextTintClicked, Color.BLACK)
             itemIconTintClicked = getColor(R.styleable.BottomNavigationItem_itemIconTintClicked, -1)
 
             recycle()

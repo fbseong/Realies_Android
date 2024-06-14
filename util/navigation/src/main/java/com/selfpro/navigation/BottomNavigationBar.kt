@@ -26,10 +26,16 @@ class BottomNavigationBar @JvmOverloads constructor(
     private var barTopLineColor: Int
     private var barBackgroundColor: Int
 
+
     var navigationRoute: NavigationRoute? = null
         set(value) {
             field = value
+
             value?.apply {
+                val fragmentContainer = fragmentContainer
+                val navDestinations = navDestinations
+                val activity = appCompatActivity
+
                 val navHost = activity.supportFragmentManager.findFragmentById(fragmentContainer)
 
                 navDestinations.map { navData ->
@@ -54,13 +60,12 @@ class BottomNavigationBar @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    val barTopLinePaint = Paint().apply {
+    private val barTopLinePaint = Paint().apply {
         color = barTopLineColor
         strokeWidth = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 1f, resources.displayMetrics
         )
     }
-
 
     override fun dispatchDraw(canvas: Canvas) {
         canvas.apply {

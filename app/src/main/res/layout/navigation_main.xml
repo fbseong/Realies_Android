@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.selfpro.navigation.BottomNavigationBar
+        android:id="@+id/bn_main"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        app:barBackground="@color/background"
+        app:barTopLineColor="@color/index">
+
+        <com.selfpro.navigation.BottomNavigationItem
+            android:id="@+id/ni_realies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:itemIcon="@drawable/selector_realies"
+            app:itemText="릴리즈" />
+
+        <com.selfpro.navigation.BottomNavigationItem
+            android:id="@+id/ni_last"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:itemIcon="@drawable/selector_last_news"
+            app:itemText="지난 뉴스" />
+
+        <com.selfpro.navigation.BottomNavigationItem
+            android:id="@+id/ni_challenge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:itemIcon="@drawable/selector_challenge"
+            app:itemText="도전 뉴스" />
+
+        <com.selfpro.navigation.BottomNavigationItem
+            android:id="@+id/ni_my"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:itemIcon="@drawable/selector_my"
+            app:itemText="나" />
+
+    </com.selfpro.navigation.BottomNavigationBar>
+
+</layout>
