@@ -5,9 +5,9 @@ data class NewsThumbModel(
     val thumbImage: String,
     val createdAt: String,
     val broadCasterImage: String,
-    val subThumb: List<SubThumbModel>
+    val subThumb: List<ThumbSubModel>
 ) {
-    data class SubThumbModel(
+    data class ThumbSubModel(
         val title: String,
         val createdAt: String
     )
