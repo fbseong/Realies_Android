@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+//    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -33,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+    }
     dataBinding {
         enable = true
     }
@@ -55,7 +61,7 @@ dependencies {
     implementation(libs.squareup.retrofit.logging.interceptor)
 
     //KeyboardObserver
-    implementation(libs.gun0912.ted.tedkeyboardobserver)
+//    implementation(libs.gun0912.ted.tedkeyboardobserver)
 
     //RecyclerView CircledIndicator
     implementation(libs.me.relax.circleindicator)
@@ -69,6 +75,10 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.dynamic.features.fragment)
 
+    implementation(libs.generativeai)
 
     implementation(project(":util:navigation"))
+
+
+
 }

@@ -4,6 +4,6 @@ import android.app.Application
 
 class App : Application() {
     companion object {
-        const val BASEURL = "10.0.2.2"
+        const val BASEURL = "http://10.0.2.2:47893"
     }
 }
