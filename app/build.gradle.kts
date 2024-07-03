@@ -4,6 +4,7 @@ plugins {
 
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("kotlin-kapt")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -42,6 +43,7 @@ android {
     buildFeatures {
         buildConfig = true
         dataBinding = true
+        compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -102,4 +104,11 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.6.7")
     debugImplementation("androidx.compose.ui:ui-tooling:1.6.7")
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation("io.ktor:ktor-client-core:2.3.12")
+    implementation("io.ktor:ktor-client-cio:2.3.12")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.2")
+    implementation("io.ktor:ktor-client-logging:2.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.2")
 }

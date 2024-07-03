@@ -5,5 +5,8 @@ plugins {
     alias(libs.plugins.android.library) apply false
 
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin) apply false
+
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.21"
 }
+
 

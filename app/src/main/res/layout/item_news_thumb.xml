@@ -12,7 +12,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_thumb"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:background="@drawable/bg_thumb_background" />
 
@@ -28,14 +28,20 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_title"
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tv_title"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:text="title"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="14sp" />-->
+
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/compose_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="title"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
