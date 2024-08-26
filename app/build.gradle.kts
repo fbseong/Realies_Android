@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.selfpro.realies"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -81,6 +81,9 @@ dependencies {
     implementation(libs.github.bumptech.glide)
     annotationProcessor(libs.github.bumptech.glide.compiler)
 
+    //Coil
+    implementation(libs.coil.compose)
+
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
@@ -90,20 +93,28 @@ dependencies {
 
     implementation(project(":util:navigation"))
 
-
+    //Compose
     val composeBom = platform("androidx.compose:compose-bom:2023.08.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
-    implementation("androidx.compose.runtime:runtime:1.6.7")
-    implementation("androidx.compose.ui:ui:1.6.7")
-    implementation("androidx.compose.foundation:foundation:1.6.7")
-    implementation("androidx.compose.foundation:foundation-layout:1.6.7")
-    implementation("androidx.compose.material3:material3:1.2.1")
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.6.7")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.7")
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.foundation.layout)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
+
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation(libs.flexbox)
+
+    implementation ("androidx.navigation:navigation-compose:2.7.7")
+
+    implementation ("com.google.accompanist:accompanist-webview:0.24.13-rc")
+
 
     implementation("io.ktor:ktor-client-core:2.3.12")
     implementation("io.ktor:ktor-client-cio:2.3.12")

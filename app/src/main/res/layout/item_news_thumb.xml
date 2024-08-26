@@ -9,33 +9,25 @@
         android:orientation="vertical">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_thumb"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_iv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/bg_thumb_background" />
+            android:layout_marginBottom="7dp"/>
 
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="16dp"
+            android:layout_marginBottom="7dp"
             android:scaleType="fitStart"
             android:src="@drawable/bg_realies" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
-
-            <!--            <androidx.appcompat.widget.AppCompatTextView-->
-            <!--                android:id="@+id/tv_title"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_weight="1"-->
-            <!--                android:text="title"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="14sp" />-->
+            android:layout_marginBottom="7dp"
+            android:gravity="top">
 
             <androidx.compose.ui.platform.ComposeView
                 android:id="@+id/compose_title"
@@ -43,22 +35,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="3dp"
-                android:alpha="0.4"
-                android:text="·"
-                android:textColor="@color/index"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0분 전"
-                android:textColor="@color/index"
-                android:textSize="14sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

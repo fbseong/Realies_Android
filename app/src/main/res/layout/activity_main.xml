@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:itemIcon="@drawable/selector_last_news"
-                app:itemText="지난 뉴스" />
+                app:itemIcon="@drawable/selector_subscribe"
+                app:itemText="구독" />
 
             <com.selfpro.navigation.BottomNavigationItem
                 android:id="@+id/ni_challenge"

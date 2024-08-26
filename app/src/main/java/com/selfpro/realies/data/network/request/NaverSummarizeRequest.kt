@@ -17,9 +17,9 @@ data class NaverSummarizeRequest(
 
     @Serializable
     data class Option(
-        val language: String,
-        val model: String,
-        val tone: Int,
-        val summaryCount: Int
+        val language: String = "ko",
+        val model: String = "news",
+        val tone: Int = 2,
+        val summaryCount: Int = 1
     )
 }

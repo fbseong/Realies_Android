@@ -1,6 +1,7 @@
 package com.selfpro.realies.data.network.retrofit
 
 import com.selfpro.realies.App
+import com.selfpro.realies.data.network.api.NaverOpenAIAPI
 import com.selfpro.realies.data.network.api.NewsAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,5 +22,12 @@ object ClientRetrofit {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    private val naverOpenAIBuilder: Retrofit = Retrofit.Builder()
+        .baseUrl(App.naverOpenAIURL)
+        .client(client)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
     val newsAPI by lazy { retrofit.create(NewsAPI::class.java) }
+    val naverOpenAI by lazy { naverOpenAIBuilder.create(NaverOpenAIAPI::class.java) }
 }
