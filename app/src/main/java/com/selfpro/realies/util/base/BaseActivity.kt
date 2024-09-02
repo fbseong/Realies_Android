@@ -126,7 +126,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>(
 
     }
 
-    private fun handleVisibility(view1: View, state: Boolean) {
+    protected fun handleVisibility(view1: View, state: Boolean) {
         if (state) {
             view1.visibility = View.VISIBLE
 
@@ -135,7 +135,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>(
         }
     }
 
-    fun handleVisibility(view1: View, view2: View, state: Boolean) {
+    protected fun handleVisibility(view1: View, view2: View, state: Boolean) {
         if (state) {
             view1.visibility = View.VISIBLE
             view2.visibility = View.VISIBLE
@@ -145,7 +145,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>(
         }
     }
 
-    private fun handleVisibility(view1: View, view2: View, view3: View, state: Boolean) {
+    protected fun handleVisibility(view1: View, view2: View, view3: View, state: Boolean) {
         if (state) {
             view1.visibility = View.VISIBLE
             view2.visibility = View.VISIBLE

@@ -10,6 +10,8 @@
         <attr name="itemIconTintClicked" format="color" />
 
         <attr name="isClicked" format="boolean" />
+
+        <attr name="itemIconSize" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="BottomNavigationBar">

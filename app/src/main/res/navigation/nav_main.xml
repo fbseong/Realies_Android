@@ -9,7 +9,7 @@
         android:id="@+id/realiesFragment"
         android:name="com.selfpro.realies.feature.main.realies.RealiesFragment"
         android:label="RealiesFragment"
-        tools:layout="@layout/fragment_realies" >
+        tools:layout="@layout/fragment_realies">
         <action
             android:id="@+id/action_realiesFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -21,7 +21,22 @@
         tools:layout="@layout/fragment_my" />
     <fragment
         android:id="@+id/searchFragment"
-        tools:layout="@layout/fragment_search"
         android:name="com.selfpro.realies.feature.main.realies.search.RealiesSearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/challengeFragment"
+        android:name="com.selfpro.realies.feature.main.challenge.ChallengeFragment"
+        android:label="ChallengeFragment"
+        tools:layout="@layout/fragment_challenge" />
+    <fragment
+        android:id="@+id/subscribesFragment"
+        android:name="com.selfpro.realies.feature.main.subscribes.SubscribesFragment"
+        android:label="SubscribesFragment"
+        tools:layout="@layout/fragment_subscribes" />
+    <fragment
+        android:id="@+id/addFragment"
+        tools:layout="@layout/fragment_add"
+        android:name="com.selfpro.realies.feature.main.add.AddFragment"
+        android:label="AddFragment" />
 </navigation>

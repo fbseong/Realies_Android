@@ -3,6 +3,7 @@ package com.selfpro.realies.util.shimmerEffect
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,10 +16,12 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ShimmerNewsTitleBox() {
     Box(
-        modifier = Modifier.background(
-            brush = shimmerEffect(),
-            shape = RoundedCornerShape(5.dp)
-        )
+        modifier = Modifier
+            .padding(bottom = 1.dp)
+            .background(
+                brush = shimmerEffect(),
+                shape = RoundedCornerShape(5.dp)
+            )
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),

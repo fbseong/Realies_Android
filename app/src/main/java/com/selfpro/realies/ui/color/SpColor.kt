@@ -18,5 +18,14 @@ value class SpColor(val value: ULong) {
 
         @Stable
         val White = Color(0xFFFFFFFF)
+
+        @Stable
+        val Transparent = Color(0x00000000)
+
+        @Stable
+        val Error = Color(0xFFFF0000)
+
+        @Stable
+        val Theme = Color(0xFFFF9C54)
     }
 }

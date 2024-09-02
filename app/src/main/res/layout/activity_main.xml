@@ -35,12 +35,20 @@
                 app:itemText="릴리즈" />
 
             <com.selfpro.navigation.BottomNavigationItem
-                android:id="@+id/ni_last"
+                android:id="@+id/ni_subscribes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:itemIcon="@drawable/selector_subscribe"
                 app:itemText="구독" />
+
+            <com.selfpro.navigation.BottomNavigationItem
+                android:id="@+id/ni_add"
+                android:layout_width="match_parent"
+                app:itemIconSize="28dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:itemIcon="@drawable/ic_add"/>
 
             <com.selfpro.navigation.BottomNavigationItem
                 android:id="@+id/ni_challenge"

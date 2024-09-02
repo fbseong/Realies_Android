@@ -6,10 +6,13 @@ import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.Dimension
 
 class BottomNavigationItem @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
@@ -27,6 +30,8 @@ class BottomNavigationItem @JvmOverloads constructor(
 
     private val itemTextTintClicked: Int
     private val itemIconTintClicked: Int
+
+    private val itemIconSize: Int
 
     init {
         val layout =
@@ -46,10 +51,21 @@ class BottomNavigationItem @JvmOverloads constructor(
                 getColor(R.styleable.BottomNavigationItem_itemTextTintClicked, Color.BLACK)
             itemIconTintClicked = getColor(R.styleable.BottomNavigationItem_itemIconTintClicked, -1)
 
+            itemIconSize = getDimensionPixelSize(
+                R.styleable.BottomNavigationItem_itemIconSize,
+                TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    18f,
+                    resources.displayMetrics
+                ).toInt()
+            )
+
             recycle()
         }
-
-        itemTextView.text = itemText
+        if (itemText.isNotEmpty()) {
+            itemTextView.visibility = View.VISIBLE
+            itemTextView.text = itemText
+        }
         changeCheckState(isClicked)
 
         if (src != -1) itemIconView.setImageResource(src)
@@ -58,6 +74,10 @@ class BottomNavigationItem @JvmOverloads constructor(
     internal fun changeCheckState(mIsClicked: Boolean) {
         isClicked = mIsClicked
         itemIconView.isActivated = mIsClicked
+
+        itemIconView.layoutParams.height = itemIconSize
+        itemIconView.layoutParams.width = itemIconSize
+
         if (mIsClicked) {
             itemTextView.setTextColor(itemTextTintClicked)
 

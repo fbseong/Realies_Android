@@ -10,15 +10,20 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -26,13 +31,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -63,6 +72,7 @@ fun RealiesScreen(
     val newsState by realiesViewModel.realeiesFlow.collectAsState()
     realiesViewModel.getRecommendationRealies(0)
 
+
     LazyColumn {
         item {
             Image(
@@ -70,34 +80,56 @@ fun RealiesScreen(
                 contentDescription = "RealiesLogo",
                 modifier = Modifier.padding(bottom = 10.dp, start = 15.dp)
             )
-            RealiesSearchBox(modifier = Modifier.padding(horizontal = 15.dp), onClick = {
+            RealiesSearchBox {
                 sharedViewModel.mainNavController.navigate("realiesSearch")
-            })
+            }
+
+
         }
         stickyHeader {
-            Row(
-                modifier = Modifier
-                    .background(color = SpColor.White)
-                    .horizontalScroll(categoryScrollState)
-                    .padding(vertical = 8.dp, horizontal = 15.dp),
+            val items = listOf("Realies", "hello", "world", "bravo", "my", "life")
+            var selectedItem by remember { mutableStateOf<String?>(null) }
+            var selectedRealies by remember { mutableStateOf(false) }
+
+            LazyRow(
+                modifier = Modifier.padding(vertical = 8.dp),
+                contentPadding = PaddingValues(horizontal = 15.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                CategoryItem("안녕")
-                CategoryItem("Hello")
-                CategoryItem("World!")
-                CategoryItem("World!")
-                CategoryItem("World!")
-                CategoryItem("World!")
-                CategoryItem("World!")
-                CategoryItem("World!")
-                CategoryItem("World!")
-                CategoryItem("World!")
+                items(items.size) {
+                    val item = items[it]
+                    val isSelected = item == selectedItem
+
+                    if (it == 0) {
+                        CategoryRealiesItem(categoryInfo = "릴리즈", isSelected = selectedRealies) {
+                            selectedRealies = !selectedRealies
+                        }
+
+                    } else {
+                        CategoryItem(categoryInfo = "hello", isSelected = isSelected) {
+                            selectedItem = if (selectedItem == item) {
+                                null
+                            } else {
+                                item
+                            }
+                        }
+                    }
+                }
             }
         }
         when (newsState) {
             is LoadState.Loading -> {
                 items(20) {
                     NewsShimmerColumnItem()
+
+                    HorizontalDivider(
+                        thickness = 0.5.dp,
+                        color = SpColor.StrokeGray,
+                        modifier = Modifier.padding(
+                            horizontal = 15.dp,
+                            vertical = 8.dp
+                        )
+                    )
                 }
             }
 
@@ -110,6 +142,15 @@ fun RealiesScreen(
                         sharedViewModel.url = it
                         sharedViewModel.mainNavController.navigate("news")
                     }
+
+                    HorizontalDivider(
+                        thickness = 0.5.dp,
+                        color = SpColor.StrokeGray,
+                        modifier = Modifier.padding(
+                            horizontal = 15.dp,
+                            vertical = 8.dp
+                        )
+                    )
                 }
             }
 
@@ -121,10 +162,17 @@ fun RealiesScreen(
     }
 }
 
+
 @Composable
-fun CategoryItem(categoryInfo: String) {
+fun CategoryItem(categoryInfo: String, isSelected: Boolean, onClick: () -> Unit) {
+    val backgroundColor = if (isSelected) SpColor.StrokeGray else SpColor.BoxGray
+    val textColor = if (isSelected) SpColor.BoxGray else SpColor.StrokeGray
+
+    val interactionSource = remember { MutableInteractionSource() }
+
     Text(
         text = categoryInfo,
+        color = textColor,
         fontSize = 12.sp,
         modifier = Modifier
             .border(
@@ -132,28 +180,67 @@ fun CategoryItem(categoryInfo: String) {
                 color = SpColor.StrokeGray,
                 shape = RoundedCornerShape(100.dp)
             )
-            .background(color = SpColor.BoxGray, shape = RoundedCornerShape(100.dp))
+            .clickable(
+                onClick = onClick,
+                interactionSource = interactionSource,
+                indication = null
+            )
+            .background(color = backgroundColor, shape = RoundedCornerShape(100.dp))
             .padding(horizontal = 20.dp, vertical = 8.dp)
     )
 }
 
 @Composable
-fun RealiesSearchBox(modifier: Modifier = Modifier, onClick: () -> Unit) {
-    var text by remember { mutableStateOf("") }
+fun CategoryRealiesItem(categoryInfo: String, isSelected: Boolean, onClick: () -> Unit) {
+    val backgroundBrush = if (isSelected) Brush.horizontalGradient(
+        listOf(
+            Color(0xFFFFB054),
+            Color(0xFFFF6EA2)
+        )
+    ) else Brush.horizontalGradient(
+        listOf(
+            SpColor.BoxGray,
+            SpColor.BoxGray
+        )
+    )
+
+    val textColor = if (isSelected) SpColor.White else SpColor.Black
+
     val interactionSource = remember { MutableInteractionSource() }
 
-    BasicTextField(
-        value = text,
-        enabled = false,
-        onValueChange = { text = it },
-        modifier = modifier
+    Text(
+        text = categoryInfo,
+        color = textColor,
+        fontSize = 12.sp,
+        modifier = Modifier
             .clickable(
+                onClick = onClick,
                 interactionSource = interactionSource,
                 indication = null
-            ) {
-                onClick()
-            }
-            .fillMaxWidth()
+            )
+            .border(
+                brush = Brush.horizontalGradient(listOf(Color(0xFFFFB054), Color(0xFFFF6EA2))),
+                width = 0.5.dp,
+                shape = RoundedCornerShape(100.dp)
+            )
+            .background(brush = backgroundBrush, shape = RoundedCornerShape(100.dp))
+            .padding(horizontal = 20.dp, vertical = 8.dp)
+    )
+}
+
+@Composable
+fun RealiesSearchBox(onClick: () -> Unit) {
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Box(
+        modifier = Modifier
+            .padding(horizontal = 15.dp)
+            .height(44.dp)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            )
             .border(
                 color = SpColor.StrokeGray,
                 shape = RoundedCornerShape(100.dp),
@@ -163,23 +250,55 @@ fun RealiesSearchBox(modifier: Modifier = Modifier, onClick: () -> Unit) {
                 color = SpColor.BoxGray,
                 shape = RoundedCornerShape(100.dp)
             )
-            .padding(12.dp),
+    ) {
+        Text(
+            text = "검색..",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp)
+                .align(Alignment.Center),
+            color = SpColor.StrokeGray
+        )
+    }
 
-        textStyle = TextStyle(
-            color = SpColor.Black,
-            fontSize = 14.sp
-        ),
-        decorationBox = { innerTextField ->
-            if (text.isEmpty()) {
-                Text(
-                    text = "검색..",
-                    fontSize = 14.sp,
-                    color = SpColor.StrokeGray
-                )
-            }
-            innerTextField()
-        }
-    )
+//    BasicTextField(
+//        value = text,
+//        enabled = false,
+//        onValueChange = { text = it },
+//        modifier = modifier
+//            .clickable(
+//                interactionSource = interactionSource,
+//                indication = null
+//            ) {
+//                onClick()
+//            }
+//            .fillMaxWidth()
+//            .border(
+//                color = SpColor.StrokeGray,
+//                shape = RoundedCornerShape(100.dp),
+//                width = 0.5.dp
+//            )
+//            .background(
+//                color = SpColor.BoxGray,
+//                shape = RoundedCornerShape(100.dp)
+//            )
+//            .padding(12.dp),
+//
+//        textStyle = TextStyle(
+//            color = SpColor.Black,
+//            fontSize = 14.sp
+//        ),
+//        decorationBox = { innerTextField ->
+//            if (text.isEmpty()) {
+//                Text(
+//                    text = "검색..",
+//                    fontSize = 14.sp,
+//                    color = SpColor.StrokeGray
+//                )
+//            }
+//            innerTextField()
+//        }
+//    )
 }
 
 
@@ -238,7 +357,7 @@ fun NewsThumbModelColumnItem(
             contentDescription = "News Withdrawn Logo"
         )
 
-        NewsTitleBox(modifier = Modifier.weight(1f), data = data)
+        NewsTitleBox(modifier = Modifier.padding(bottom = 1.dp), data = data)
 
         NewsDateBox(data = data)
     }
@@ -247,31 +366,20 @@ fun NewsThumbModelColumnItem(
 @Composable
 fun NewsShimmerColumnItem(
 ) {
-
     Column(modifier = Modifier.padding(horizontal = 15.dp)) {
-
         Box(
             modifier = Modifier
                 .padding(bottom = 10.dp)
                 .clip(RoundedCornerShape(12.dp)),
         ) {
-            SubcomposeAsyncImage(
-                model = Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(240.dp)
-                        .background(shimmerEffect())
-                ),
-                contentDescription = null,
+            Box(
                 modifier = Modifier
+                    .background(shimmerEffect())
+                    .height(240.dp)
                     .fillMaxWidth()
-                    .wrapContentHeight(),
-                contentScale = ContentScale.FillWidth
             )
         }
-
         ShimmerNewsWithdrawnLogo()
-
         ShimmerNewsTitleBox()
         ShimmerNewsDateBox()
     }
@@ -283,7 +391,7 @@ fun NewsTitleBox(modifier: Modifier, data: RealiesRequest) {
     Text(
         modifier = modifier,
         text = data.title,
-        fontSize = 15.sp,
+        fontSize = 14.sp,
         textAlign = TextAlign.Left,
         color = Color.Black
     )
@@ -323,4 +431,11 @@ private fun getDurationTime(createdAt: String): String {
         years < 1 -> "${days / 30}개월 전"
         else -> "${years}년 전"
     }
+}
+
+@Preview
+@Composable
+fun CategoryRealiesItemPreview() {
+//    CategoryRealiesItem("Realies")
+
 }

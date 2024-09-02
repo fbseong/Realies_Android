@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 fun ShimmerNewsWithdrawnLogo() {
     Box(
         modifier = Modifier
-            .padding(bottom = 3.dp)
+            .padding(bottom = 1.dp)
             .background(
                 brush = shimmerEffect(),
                 shape = RoundedCornerShape(5.dp)
