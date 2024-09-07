@@ -9,4 +9,9 @@ interface NewsAPI {
     suspend fun getNewsRecommendation(
         @Query("page") page: Int
     ): List<RealiesRequest>
+
+    @GET("/realies/provider")
+    suspend fun getNewsProvider(
+        @Query("provider") provider: String
+    ): List<RealiesRequest>
 }

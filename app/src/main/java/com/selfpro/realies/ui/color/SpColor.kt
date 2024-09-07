@@ -1,5 +1,6 @@
 package com.selfpro.realies.ui.color
 
+import android.content.res.Resources.Theme
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 
@@ -27,5 +28,17 @@ value class SpColor(val value: ULong) {
 
         @Stable
         val Theme = Color(0xFFFF9C54)
+
+        @Stable
+        val ThemeStart = Color(0xFFFFB054)
+
+        @Stable
+        val ThemeEnd = Color(0xFFFF6EA2)
+
+        @Stable
+        val Unable = Color(0xFFDFE0E2)
+
+        @Stable
+        val Void = Color(0x00000000)
     }
 }

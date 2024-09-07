@@ -28,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
@@ -40,17 +39,16 @@ import com.selfpro.realies.R
 import com.selfpro.realies.SharedViewModel
 import com.selfpro.realies.data.model.LoadState
 import com.selfpro.realies.data.network.request.RealiesRequest
-import com.selfpro.realies.feature.lazy.NewsThumbViewModel
-import com.selfpro.realies.feature.main.realies.CategoryItem
-import com.selfpro.realies.feature.main.realies.NewsShimmerColumnItem
-import com.selfpro.realies.feature.main.realies.NewsThumbModelColumnItem
+import com.selfpro.realies.feature.assests.news.NewsColumnLazyItem
+import com.selfpro.realies.feature.assests.news.NewsShimmerColumnItem
+import com.selfpro.realies.feature.main.realies.RealiesViewModel
 import com.selfpro.realies.ui.color.SpColor
 import com.selfpro.realies.util.shimmerEffect.shimmerEffect
 
 @Composable
 fun SubscribesScreen(
     sharedViewModel: SharedViewModel,
-    realiesViewModel: NewsThumbViewModel = viewModel()
+    realiesViewModel: RealiesViewModel = viewModel()
 ) {
     val newsState by realiesViewModel.realeiesFlow.collectAsState()
     realiesViewModel.getRecommendationRealies(0)
@@ -162,11 +160,10 @@ fun SubscribesScreen(
                 val data = (newsState as LoadState.Success).data as List<RealiesRequest>
 
                 items(data.size) {
-                    NewsThumbModelColumnItem(modifier = Modifier, data = data[it]) {
+                    NewsColumnLazyItem(modifier = Modifier, data = data[it], onClick = {
                         sharedViewModel.url = it
                         sharedViewModel.mainNavController.navigate("news")
-                    }
-
+                    })
                     HorizontalDivider(
                         thickness = 0.5.dp,
                         color = SpColor.StrokeGray,

@@ -5,7 +5,6 @@ import androidx.fragment.app.viewModels
 import com.selfpro.realies.R
 import com.selfpro.realies.SharedViewModel
 import com.selfpro.realies.databinding.FragmentChallengeBinding
-import com.selfpro.realies.feature.main.realies.RealiesViewModel
 import com.selfpro.realies.util.base.BaseFragment
 
 class ChallengeFragment :

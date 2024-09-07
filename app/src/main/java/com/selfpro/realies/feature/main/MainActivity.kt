@@ -17,6 +17,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     override fun start() {
         extendEdgeToEdge(R.id.main)
 
+        val memberClass = "Guest"
+        if (memberClass == "Guest"){
+            binding.niSubscribes.visibility = View.GONE
+            binding.niAdd.visibility = View.GONE
+        }
+
         //일기 추가 애니메이션 정의
         val addDNavOptions = NavOptions.Builder()
             .setEnterAnim(R.anim.anim_down_first)
@@ -30,7 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
             listOf(
                 NavData(binding.niRealies, R.id.realiesFragment),
                 NavData(binding.niSubscribes, R.id.subscribesFragment),
-                NavData(binding.niAdd, R.id.addFragment, addDNavOptions, true ) {
+                NavData(binding.niAdd, R.id.addFragment, addDNavOptions, true) {
                     handleBottomNavigationVisibility(false)
                 },
                 NavData(binding.niChallenge, R.id.challengeFragment),

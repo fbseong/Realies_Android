@@ -1,6 +1,7 @@
 package com.selfpro.realies.data.network.api
 
 import com.selfpro.realies.data.network.request.NaverSummarizeRequest
+import com.selfpro.realies.data.network.response.NaverSummarizeResponse
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -12,5 +13,5 @@ interface NaverOpenAIAPI {
         @Header("X-NCP-APIGW-API-KEY") apiKey: String = "W6QfzbUk3G0KewBY3mPaeyMWvognN25wu08XMEC6",
         @Header("Content-Type") contentType: String = "application/json",
         @Body naverSummarizeData: NaverSummarizeRequest
-    ): Any//NaverSummarizeResponse
+    ): NaverSummarizeResponse
 }

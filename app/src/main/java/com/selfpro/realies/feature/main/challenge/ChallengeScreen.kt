@@ -2,9 +2,6 @@ package com.selfpro.realies.feature.main.challenge
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -32,19 +29,19 @@ import com.selfpro.realies.R
 import com.selfpro.realies.SharedViewModel
 import com.selfpro.realies.data.model.LoadState
 import com.selfpro.realies.data.network.request.RealiesRequest
-import com.selfpro.realies.feature.lazy.NewsThumbViewModel
-import com.selfpro.realies.feature.main.realies.CategoryItem
-import com.selfpro.realies.feature.main.realies.CategoryRealiesItem
-import com.selfpro.realies.feature.main.realies.NewsShimmerColumnItem
-import com.selfpro.realies.feature.main.realies.NewsThumbModelColumnItem
-import com.selfpro.realies.feature.main.realies.RealiesSearchBox
+import com.selfpro.realies.feature.assests.news.CategoryItem
+import com.selfpro.realies.feature.assests.news.CategoryRealiesItem
+import com.selfpro.realies.feature.assests.news.NewsColumnLazyItem
+import com.selfpro.realies.feature.assests.news.NewsShimmerColumnItem
+import com.selfpro.realies.feature.assests.news.RealiesSearchBox
+import com.selfpro.realies.feature.main.realies.RealiesViewModel
 import com.selfpro.realies.ui.color.SpColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ChallengeScreen(
     sharedViewModel: SharedViewModel,
-    realiesViewModel: NewsThumbViewModel = viewModel()
+    realiesViewModel: RealiesViewModel = viewModel()
 ) {
 
     val categoryScrollState = rememberScrollState()
@@ -129,10 +126,10 @@ fun ChallengeScreen(
                 val data = (newsState as LoadState.Success).data as List<RealiesRequest>
 
                 items(data.size) {
-                    NewsThumbModelColumnItem(modifier = Modifier, data = data[it]) {
+                    NewsColumnLazyItem(modifier = Modifier, data = data[it], onClick = {
                         sharedViewModel.url = it
                         sharedViewModel.mainNavController.navigate("news")
-                    }
+                    })
 
                     HorizontalDivider(
                         thickness = 0.5.dp,

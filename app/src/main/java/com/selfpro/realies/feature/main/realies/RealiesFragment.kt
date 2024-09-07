@@ -43,13 +43,16 @@ class RealiesFragment :
             composable("news") {
                 NewsScreen(sharedViewModel)
             }
+            composable("sign-in"){
+                SignInScreen()
+            }
         }
 
 
     }
 }
 
-//        binding.editSearch.focusable = false
+//        binding.editSearch.focusable = zfalse
 //        binding.editSearch.setOnClickListener { findNavController().navigate(R.id.action_realiesFragment_to_searchFragment) }
 
 
