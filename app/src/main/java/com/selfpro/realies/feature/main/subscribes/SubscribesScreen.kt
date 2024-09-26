@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.selfpro.realies.R
 import com.selfpro.realies.SharedViewModel
@@ -47,7 +48,7 @@ import com.selfpro.realies.util.shimmerEffect.shimmerEffect
 
 @Composable
 fun SubscribesScreen(
-    sharedViewModel: SharedViewModel,
+    sharedViewModel: SharedViewModel = hiltViewModel(),
     realiesViewModel: RealiesViewModel = viewModel()
 ) {
     val newsState by realiesViewModel.realeiesFlow.collectAsState()

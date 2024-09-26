@@ -1,167 +1,213 @@
 package com.selfpro.realies.feature.main.add
 
-import CursorDropdownMenuSample
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.Popup
+import com.selfpro.realies.App
 import com.selfpro.realies.R
+import com.selfpro.realies.data.model.EditCombination
+import com.selfpro.realies.data.model.MenuAssets
+import com.selfpro.realies.data.model.NewsAddMenuModel
+import com.selfpro.realies.feature.assests.add.DropMenuLazyRow
+import com.selfpro.realies.feature.assests.add.MenuImageList
+import com.selfpro.realies.feature.assests.add.MenuMinTitle
+import com.selfpro.realies.feature.assests.add.MenuTextField
 import com.selfpro.realies.ui.color.SpColor
 import com.selfpro.realies.util.AlertScreenData
 import com.selfpro.realies.util.SpLog
-import com.selfpro.realies.util.shimmerLoading
 
 @Composable
 fun AddScreen(popBackStack: () -> Unit) {
-    Box(
+
+    //뉴스 전체 값
+    var globalFieldValueList =
+        remember { mutableStateOf(listOf<MenuAssets>(MenuAssets.Text())) }
+    SpLog.d(globalFieldValueList.value)
+
+    val globalFieldValueText = globalFieldValueList.value
+        .filterIsInstance<MenuAssets.Text>()
+        .joinToString("\n") { it.data }
+
+    var showDialog by remember { mutableStateOf(false) }//다이얼로그 표시
+    var alertData by remember { mutableStateOf(AlertScreenData("", "")) }//팝업 다이얼로그 데이터
+    if (showDialog) AlertScreen(alertData)  //다이얼로그 띄우기
+
+    var absoluteCursorPosition = remember { mutableStateOf(IntOffset(0, 0)) }   //커서 절대 좌표
+    var expanded = remember { mutableStateOf(false) }   //드롭 메뉴 띄우기
+
+    val focusedMenuIndex = remember { mutableIntStateOf(0) }
+
+    val lazyListState = rememberLazyListState()
+
+    val deleteSlash = remember {
+        mutableStateOf<Int?>(null)
+    }
+
+    val items = listOf(
+        NewsAddMenuModel(
+            title = "이미지", description = "파일을 업로드하여 추가하세요", image = R.drawable.ic_menu_image
+        ) {
+            globalFieldValueList.value = globalFieldValueList.value.toMutableList().apply {
+                add(MenuAssets.Image(App.CONTENTCODEImage))
+                add(MenuAssets.Text(App.CONTENTCODEText))
+            }
+            expanded.value = false
+
+            deleteSlash.value = focusedMenuIndex.intValue
+        },
+        NewsAddMenuModel(
+            title = "AI 자동 생성",
+            description = "AI를 통해 뉴스를 완성하세요",
+            image = R.drawable.ic_menu_ai
+        ) {},
+        NewsAddMenuModel(
+            title = "소제목",
+            description = "섹션 제목 설정",
+            image = R.drawable.ic_menu_textmin
+        ) {
+            globalFieldValueList.value = globalFieldValueList.value.toMutableList().apply {
+                add(MenuAssets.MinTitle(App.CONTENTCODEMiniTItle))
+                add(MenuAssets.Text(App.CONTENTCODEText))
+            }
+            expanded.value = false
+
+            deleteSlash.value = focusedMenuIndex.intValue
+        })
+
+    val editCombination = remember { mutableStateOf<EditCombination?>(null)}
+
+    Column(
         modifier = Modifier
             .background(SpColor.White)
             .fillMaxSize()
     ) {
-        //스크롤 관리
-        val scrollState = rememberScrollState()
-        //뉴스 본문값
-        var contentFieldValue = remember { mutableStateOf(TextFieldValue("")) }
-        //제목 초기화 여부
-        var isTitleInit by remember { mutableStateOf(false) }
-        //전송 여부
-        var isSend by remember { mutableStateOf(false) }
-        //다이얼로그 표시
-        var showDialog by remember { mutableStateOf(false) }
-        //팝업 다이얼로그 데이터
-        var alertData by remember { mutableStateOf(AlertScreenData("", "")) }
-        //다이얼로그 띄우기
-        if (showDialog) {
-            AlertScreen(alertData)
+        val offset = absoluteCursorPosition.value
+
+        if (expanded.value) {
+            Popup(
+                offset = offset,
+                onDismissRequest = {
+                    expanded.value = false
+                }) {
+                DropMenuLazyRow(items)
+            }
         }
 
-        var expanded = remember { mutableStateOf(false) }
+        LazyColumn(state = lazyListState) {
+            item {
+                Column {
+                    var titleFieldValue by rememberSaveable { mutableStateOf("") }
+                    var isVisible by remember { mutableStateOf(false) }
+                    var isLoading by remember { mutableStateOf(false) }
+                    var isTitleInit by remember { mutableStateOf(false) }   //제목 초기화 여부
+                    var isSend by remember { mutableStateOf(false) }        //전송 여부
 
-
-        Column(modifier = Modifier.verticalScroll(scrollState)) {
-            var titleFieldValue by rememberSaveable { mutableStateOf("") }
-            var isVisible by remember { mutableStateOf(false) }
-            var isLoading by remember { mutableStateOf(false) }
-
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 15.dp)
-            ) {
-                CloseBox {
-                    alertData = AlertScreenData(
-                        title = "작성중인 뉴스가 있습니다.",
-                        message = "저장되지 않고 나갈 경우 지금까지 작성한 내용이\n사라집니다.",
-                        onConfirm = { popBackStack() },
-                        onDismiss = { showDialog = false },
-                        confirmText = "삭제하기",
-                        dismissText = "취소"
-                    )
-                    showDialog = true
-                }
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                SendNewsCheckBox(isSend, isTitleInit) { isSend = true }
-            }
-            AnimatedVisibility(visible = isVisible) {
-                GeneratedTitleText(
-                    titleFieldValue = titleFieldValue,
-                    isLoading = isLoading
-                )
-            }
-            Row(Modifier.padding(top = 8.dp)) {
-                GenerateTitleButton(
-                    modifier = Modifier.weight(1f),
-                    isLoading = isLoading,
-                    isVisible = isVisible
-                ) {
-                    if (contentFieldValue.value.text.isEmpty()) {
-                        alertData = AlertScreenData(
-                            title = "뉴스 제목을 생성할 수 없습니다.",
-                            message = "30자 이하는 뉴스 제목을 생성할 수 없습니다.",
-                            confirmText = "확인",
-                            onConfirm = { showDialog = false }
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 15.dp)
+                    ) {
+                        CloseBox {
+                            alertData = AlertScreenData(
+                                title = "작성중인 뉴스가 있습니다.",
+                                message = "저장되지 않고 나갈 경우 지금까지 작성한 내용이\n사라집니다.",
+                                onConfirm = { popBackStack() },
+                                onDismiss = { showDialog = false },
+                                confirmText = "삭제하기",
+                                dismissText = "취소"
+                            )
+                            showDialog = true
+                        }
+                        Spacer(modifier = Modifier.weight(1f))
+                        SendNewsCheckBox(isSend, isTitleInit) { isSend = true }
+                    }
+                    AnimatedVisibility(visible = isVisible) {
+                        GeneratedTitleText(
+                            titleFieldValue = titleFieldValue, isLoading = isLoading
                         )
-                        showDialog = true
-                    } else {
-                        isVisible = !isVisible
-                        isLoading = true
-                        isTitleInit = true
+                    }
+                    Row(Modifier.padding(top = 8.dp)) {
+                        GenerateTitleButton(
+                            modifier = Modifier.weight(1f),
+                            isLoading = isLoading,
+                            isVisible = isVisible
+                        ) {
+                            if (globalFieldValueText.length < 30) {
+                                alertData = AlertScreenData(title = "뉴스 제목을 생성할 수 없습니다.",
+                                    message = "30자 이하는 뉴스 제목을 생성할 수 없습니다.",
+                                    confirmText = "확인",
+                                    onConfirm = { showDialog = false })
+                                showDialog = true
+                            } else {
+                                isVisible = true
+                                isLoading = true
+                                isTitleInit = true
+                            }
+                        }
+                        AnimatedVisibility(visible = isVisible) {
+                            TitleReport {}
+                        }
                     }
                 }
-                AnimatedVisibility(visible = isVisible) {
-                    TitleReport {}
+
+
+            }
+
+
+
+            items(count = globalFieldValueList.value.size) { index ->
+                if (globalFieldValueList.value[index] is MenuAssets.Text) {
+                    MenuTextField(
+                        globalFieldValueList = globalFieldValueList,
+                        globalIndex = index,
+                        onValueChange = { expanded.value = it.text.lastOrNull() == '/' },
+                        absoluteCursorPosition = absoluteCursorPosition,
+                        lazyListState = lazyListState,
+                        deleteSlash = deleteSlash,
+                        focused = { focusedMenuIndex.value = it },
+                        combination = editCombination
+                    )
+                } else if (globalFieldValueList.value[index] is MenuAssets.Image) {
+                    MenuImageList(
+                        globalFieldValueList = globalFieldValueList,
+                        globalIndex = index
+
+                    )
+                } else if (globalFieldValueList.value[index] is MenuAssets.MinTitle) {
+                    MenuMinTitle(
+                        globalFieldValueList = globalFieldValueList,
+                        globalIndex = index,
+                        lazyListState = lazyListState
+                    )
                 }
             }
-            var lastWordStartsWithSlash by remember { mutableStateOf(false) }
-            var lastWord = remember { mutableStateOf("")}
-
-            NewsContentTextField(
-                lastWord = lastWord,
-                contentFieldValue = contentFieldValue,
-                onStartValueChange = {
-                    contentFieldValue.value = it
-
-                    val words = it.text.lines().flatMap { it.split(" ") }
-                    lastWord.value = words.lastOrNull() ?: ""
-                    lastWordStartsWithSlash = lastWord.value.startsWith("/")
-
-                    if (lastWordStartsWithSlash) expanded.value = true
-                    else expanded.value = false
-                },
-                onValueChange = {
-                    val words = it.text.lines().flatMap { it.split(" ") }
-                    lastWord.value = words.lastOrNull() ?: ""
-                    lastWordStartsWithSlash = lastWord.value.startsWith("/")
-
-                    if (lastWordStartsWithSlash) expanded.value = true
-                    else expanded.value = false
-                },
-                expanded = expanded
-            )
+            item {
+                Spacer(modifier = Modifier.height(300.dp))
+            }
         }
     }
 }
+
 
 @Preview
 @Composable

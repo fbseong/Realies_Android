@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.selfpro.realies.R
 import com.selfpro.realies.SharedViewModel
@@ -27,7 +28,7 @@ import com.selfpro.realies.ui.color.SpColor
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RealiesScreen(
-    sharedViewModel: SharedViewModel,
+    sharedViewModel: SharedViewModel = hiltViewModel(),
     realiesViewModel: RealiesViewModel = viewModel()
 ) {
     val categoryScrollState = rememberScrollState()

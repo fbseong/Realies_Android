@@ -2,9 +2,11 @@ package com.selfpro.realies.feature.main.realies
 
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import com.google.ai.client.generativeai.GenerativeModel
 import com.selfpro.realies.BuildConfig
 import com.selfpro.realies.data.model.LoadState
+import com.selfpro.realies.data.model.MemberClass
 import com.selfpro.realies.data.network.retrofit.ClientRetrofit
 import com.selfpro.realies.util.SpLog
 import com.selfpro.realies.util.base.BaseViewModel
@@ -14,6 +16,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class RealiesViewModel : BaseViewModel() {
+
+    var url: String? = null
+
     private val _realiesFlow = MutableStateFlow<LoadState>(LoadState.Loading)
     val realeiesFlow = _realiesFlow.asStateFlow()
 

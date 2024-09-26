@@ -51,20 +51,10 @@ fun SearchScreen() {
     var cursorPosition = remember { mutableStateOf(0) }
 
     val recentCategory = listOf(
-        "안녕",
-        "Helloewfewfwe",
-        "World!wefewf",
-        "Heefwfewfllo",
-        "Worlewfewfd!",
-        "Hfewfwefello",
+        "비투비","육성재","이창섭","비투","나의 바람","루시"
     )
     val popularCategory = listOf(
-        "안녕",
-        "Helloewfewfwe",
-        "World!wefewf",
-        "Heefwfewfllo",
-        "Worlewfewfd!",
-        "Hfewfwefello",
+        "비투비","루시","뜨거워지자", "육성재","이창섭"
     )
 
     LazyColumn {

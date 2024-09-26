@@ -1,5 +1,6 @@
 package com.selfpro.realies.feature.main.realies
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -11,46 +12,28 @@ import com.selfpro.realies.SharedViewModel
 import com.selfpro.realies.databinding.FragmentRealiesBinding
 import com.selfpro.realies.feature.main.news.NewsScreen
 import com.selfpro.realies.feature.main.realies.search.SearchScreen
+import com.selfpro.realies.feature.main.sign.SignInScreen
+import com.selfpro.realies.util.SpLog
 import com.selfpro.realies.util.base.BaseFragment
+import com.selfpro.realies.util.base.BaseViewModel
 
 class RealiesFragment :
     BaseFragment<FragmentRealiesBinding, RealiesViewModel>(R.layout.fragment_realies) {
     override val viewModel: RealiesViewModel by viewModels()
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     override fun start() {
 
-
-        binding.composeNews.setContent {
-            MainScreen()
-        }
-    }
-
-    @Composable
-    fun MainScreen() {
-        val navController = rememberNavController()
-
-        sharedViewModel.mainNavController = navController
-
-
-        NavHost(navController = navController, startDestination = "realies") {
-            composable("realies") {
-                RealiesScreen(sharedViewModel)
-            }
-            composable("realiesSearch") {
-                SearchScreen()
-            }
-            composable("news") {
-                NewsScreen(sharedViewModel)
-            }
-            composable("sign-in"){
-                SignInScreen()
-            }
-        }
-
-
+//
+//        binding.composeNews.setContent {
+////            SignInScreen(false) {
+//            MainScreen(sharedViewModel)
+////            }
+//        }
     }
 }
+
+
 
 //        binding.editSearch.focusable = zfalse
 //        binding.editSearch.setOnClickListener { findNavController().navigate(R.id.action_realiesFragment_to_searchFragment) }

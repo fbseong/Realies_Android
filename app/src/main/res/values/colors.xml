@@ -7,4 +7,7 @@
     <color name="defColor">#FFF3F5F7</color>
     <color name="index">#FF6F7680</color>
     <color name="voidNull">#00000000</color>
+
+    <color name="strokeGray">#FF6F7680</color>
+
 </resources>

@@ -18,17 +18,18 @@ class AddFragment: BaseFragment<FragmentAddBinding, AddViewModel>(R.layout.fragm
     override fun start() {
         binding.composeAdd.setContent {
             AddScreen{
-                (activity as MainActivity).handleBottomNavigationVisibility(true)
-                findNavController().popBackStack()
+                //Todo: 구현해
+//                (activity as MainActivity).handleBottomNavigationVisibility(true)
+//                findNavController().popBackStack()
             }
 
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object :OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                (activity as MainActivity).handleBottomNavigationVisibility(true)
-                findNavController().popBackStack()
-            }
-        })
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object :OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                (activity as MainActivity).handleBottomNavigationVisibility(true)
+//                findNavController().popBackStack()
+//            }
+//        })
     }
 }

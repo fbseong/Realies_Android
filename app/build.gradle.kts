@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("kotlin-kapt")
     id("kotlinx-serialization")
+
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -107,6 +109,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
 
+    implementation ("androidx.navigation:navigation-compose:2.8.1")
+
+
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.flexbox)
@@ -123,6 +128,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.2")
 
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+}
 
-
+kapt {
+    correctErrorTypes = true
 }
