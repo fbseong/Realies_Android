@@ -1,14 +1,13 @@
 package com.selfpro.realies
 
 import android.app.Application
-import com.google.ai.client.generativeai.type.Content
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class App : Application() {
     companion object {
-//        const val BASEURL = "http://10.0.2.2:47893"
-                const val BASEURL = "http://172.30.1.45:47893"
+        //        const val BASEURL = "http://10.0.2.2:47893"
+        const val BASEURL = "http://10.80.163.14:47893"
         const val naverOpenAIURL = "https://naveropenapi.apigw.ntruss.com"
 
         const val CONTENTCODEText = ""

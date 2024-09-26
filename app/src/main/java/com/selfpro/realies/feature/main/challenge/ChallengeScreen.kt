@@ -64,6 +64,7 @@ import com.selfpro.realies.util.shimmerEffect.shimmerEffect
 @Composable
 fun ChallengeScreen(
     sharedViewModel: SharedViewModel = hiltViewModel(),
+    realiesViewModel: RealiesViewModel = viewModel()
 ) {
 
     val categoryScrollState = rememberScrollState()

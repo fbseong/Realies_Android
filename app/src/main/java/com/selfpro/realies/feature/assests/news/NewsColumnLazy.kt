@@ -7,19 +7,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.rounded.MoreVert
-import androidx.compose.material.icons.sharp.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,15 +35,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.SubcomposeAsyncImage
 import com.selfpro.realies.R
 import com.selfpro.realies.data.model.LoadState
 import com.selfpro.realies.data.network.request.RealiesRequest
-import com.selfpro.realies.feature.main.realies.RealiesViewModel
 import com.selfpro.realies.ui.color.SpColor
-import com.selfpro.realies.util.shimmerEffect.ShimmerNewsDateBox
-import com.selfpro.realies.util.shimmerEffect.ShimmerNewsTitleBox
 import com.selfpro.realies.util.shimmerEffect.shimmerEffect
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -179,7 +171,6 @@ fun NewsTitleBox(
     modifier: Modifier = Modifier,
     fontSize: TextUnit,
     data: RealiesRequest,
-    realiesViewModel: RealiesViewModel = viewModel(),
 ) {
     var newsTitle by remember { mutableStateOf(data.title) }
 
@@ -229,34 +220,35 @@ fun NewsDateBox(
 @Composable
 fun NewsProviderLazyRow(
     data: RealiesRequest,
-    viewModel: RealiesViewModel = viewModel()
-) {
-    if (!data.provider.isNullOrEmpty()) {
-        val loadState = remember { mutableStateOf<LoadState>(LoadState.Loading) }
-        var providerData by remember { mutableStateOf(listOf<RealiesRequest>()) }
-
-        viewModel.getProviderRealies(provider = data.provider, loadStateFlow = loadState)
-
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 15.dp)
-        ) {
-            items(providerData.size) {
-                NewsProviderLazyRowItem(data = providerData[it])
-            }
-        }
-
-        when (loadState.value) {
-            is LoadState.Success -> {
-                providerData =
-                    ((loadState.value as LoadState.Success).data as List<RealiesRequest>).drop(1)
-            }
-
-            is LoadState.Loading -> {}
-            is LoadState.Error -> {}
-        }
-    }
-}
+){}
+//    viewModel: RealiesViewModel = hiltViewModel()
+//) {
+//    if (!data.provider.isNullOrEmpty()) {
+//        val loadState = remember { mutableStateOf<LoadState>(LoadState.Loading) }
+//        var providerData by remember { mutableStateOf(listOf<RealiesRequest>()) }
+//
+//        viewModel.getProviderRealies(provider = data.provider, loadStateFlow = loadState)
+//
+//        LazyRow(
+//            horizontalArrangement = Arrangement.spacedBy(8.dp),
+//            contentPadding = PaddingValues(horizontal = 15.dp)
+//        ) {
+//            items(providerData.size) {
+//                NewsProviderLazyRowItem(data = providerData[it])
+//            }
+//        }
+//
+//        when (loadState.value) {
+//            is LoadState.Success -> {
+//                providerData =
+//                    ((loadState.value as LoadState.Success).data as List<RealiesRequest>).drop(1)
+//            }
+//
+//            is LoadState.Loading -> {}
+//            is LoadState.Error -> {}
+//        }
+//    }
+//}
 
 @Composable
 fun NewsProviderLazyRowItem(data: RealiesRequest) {

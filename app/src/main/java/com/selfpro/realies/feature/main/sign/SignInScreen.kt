@@ -13,7 +13,6 @@ import com.selfpro.realies.SharedViewModel
 fun SignInScreen(
     modifier: Modifier = Modifier,
     isSignIn: Boolean,
-    viewModel: SharedViewModel,
     content: @Composable () -> Unit
 ) {
     if (isSignIn) {
@@ -26,7 +25,6 @@ fun SignInScreen(
                 .fillMaxSize()
                 .blur(radius = 7.dp)
                 .clickable {
-                    viewModel.isTopPadding = true
                 }
         ) {
             content()

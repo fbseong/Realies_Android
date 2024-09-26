@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,29 +23,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.selfpro.realies.R
-import com.selfpro.realies.SharedViewModel
-import com.selfpro.realies.data.model.MemberClass
 import com.selfpro.realies.ui.color.SpColor
 
 @Preview
 @Composable
 fun MyScreen() {
-    GuestScreen(viewModel())
+    GuestScreen()
 }
 
-@Composable
-fun MyScreen(sharedViewModel: SharedViewModel) {
-    if (sharedViewModel.memberClass == MemberClass.Guest) {
-        GuestScreen(sharedViewModel)
-    } else {
-        JournalistScreen()
-    }
-}
+//@Composable
+//fun MyScreen(sharedViewModel: SharedViewModel) {
+//    if (sharedViewModel.memberClass == MemberClass.Guest) {
+//        GuestScreen(sharedViewModel)
+//    } else {
+//        JournalistScreen()
+//    }
+//}
 
 @Composable
-fun GuestScreen(sharedViewModel: SharedViewModel) {
+fun GuestScreen() {
     Row(
         modifier = Modifier
             .fillMaxSize()

@@ -29,7 +29,7 @@ import com.selfpro.realies.ui.color.SpColor
 @Composable
 fun RealiesScreen(
     sharedViewModel: SharedViewModel = hiltViewModel(),
-    realiesViewModel: RealiesViewModel = viewModel()
+    realiesViewModel: RealiesViewModel = hiltViewModel()
 ) {
     val categoryScrollState = rememberScrollState()
 
@@ -87,10 +87,4 @@ fun RealiesScreen(
             is LoadState.Error -> {}
         }
     }
-}
-
-@Preview
-@Composable
-fun RealiesScreenPreview() {
-    RealiesScreen(sharedViewModel = viewModel())
 }
