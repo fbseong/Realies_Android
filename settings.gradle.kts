@@ -1,30 +1,40 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
-    repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://jitpack.io") }
+        gradlePluginPortal()
+    }
+
+}
+dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://jitpack.io")
+        maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     }
 }
 
 
-
+gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:testClasses"))
 rootProject.name = "Realies_Android"
-include(":app")
-include(":util:navigation")
-include(":feature:my")
-include(":feature:challenge")
-include(":feature:realies")
+include(
+    ":app",
+    ":data:model",
+    ":data:network",
+    ":feature:add",
+    ":feature:challenge",
+    ":feature:common",
+    ":feature:my",
+    ":feature:realies",
+    ":feature:search",
+    ":feature:subscribe",
+    ":util:common",
+    ":util:icon",
+    ":util:shared"
+)
+include(":data:domain")
