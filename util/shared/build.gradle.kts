@@ -2,6 +2,7 @@ import com.selfpro.realies.build_logic.dsl.android
 
 plugins {
     alias(libs.plugins.realies.android.feature)
+//    alias(libs.plugins.realies.android.gemini)
 }
 
 
@@ -15,11 +16,11 @@ android {
 
 dependencies{
 
-    implementation(project(":data:model"))
-    implementation(project(":data:network"))
-    implementation(project(":util:common"))
+    implementation(projects.data.model)
+    implementation(projects.data.network)
+    implementation(projects.util.common)
 
     //Gemini
-    implementation(libs.generativeai)
-    implementation(project(":data:domain"))
+
+    implementation(projects.data.domain)
 }

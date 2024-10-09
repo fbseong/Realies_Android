@@ -27,6 +27,7 @@ import com.selfpro.realies.data.model.AlertScreenData
 import com.selfpro.realies.data.model.EditCombination
 import com.selfpro.realies.data.model.MenuAssets
 import com.selfpro.realies.data.model.NewsAddMenuModel
+import com.selfpro.realies.data.model.Route
 import com.selfpro.realies.shared.ContentCode
 import com.selfpro.realies.util.common.SpColor
 import com.selfpro.realies.util.common.SpLog
@@ -36,11 +37,10 @@ import com.selfpro.realies.util.icon.IcMenuTextmin
 import com.selfpro.realies.util.icon.SpIcon
 
 @Composable
-fun AddScreen(navHostController: NavHostController) {
+fun AddScreen(routeData: Route.RouteData,) {
 
     //뉴스 전체 값
     var globalFieldValueList = remember { mutableStateOf(listOf<MenuAssets>(MenuAssets.Text())) }
-    SpLog.d(globalFieldValueList.value)
 
     val globalFieldValueText = globalFieldValueList.value
         .filterIsInstance<MenuAssets.Text>()

@@ -23,6 +23,8 @@ java {
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
     implementation(libs.android.gradle.plugin)
+
+//    compileOnly(libs.detekt.gradlePlugin)
 }
 
 gradlePlugin {
@@ -51,7 +53,14 @@ gradlePlugin {
             id = "selfpro.realies.primitive.android.compose"
             implementationClass = "com.selfpro.realies.build_logic.primitive.AndroidComposePlugin"
         }
-
+        register("androidGemini"){
+            id = "selfpro.realies.primitive.android.gemini"
+            implementationClass = "com.selfpro.realies.build_logic.primitive.AndroidGeminiPlugin"
+        }
+        register("kotlinCode") {
+            id = "selfpro.kotlin.code"
+            implementationClass = "com.selfpro.realies.build_logic.primitive.KotlinCodePlugin"
+        }
 
         //Convention
         register("androidFeature") {

@@ -19,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-
 gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:testClasses"))
 rootProject.name = "Realies_Android"
 include(
@@ -38,3 +37,7 @@ include(
     ":util:shared"
 )
 include(":data:domain")
+include(":feature:viewer")
+include(":feature:sign")
+include(":data:datastore")
+include(":data:gemini")

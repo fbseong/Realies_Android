@@ -17,7 +17,7 @@ android {
 
 dependencies{
 
-    implementation(project(":data:model"))
+    implementation(projects.data.model)
 
     //Retrofit
     implementation(libs.squareup.retrofit)

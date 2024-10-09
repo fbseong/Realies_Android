@@ -23,6 +23,9 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/datastore" />
+            <option value="$PROJECT_DIR$/data/domain" />
+            <option value="$PROJECT_DIR$/data/gemini" />
             <option value="$PROJECT_DIR$/data/model" />
             <option value="$PROJECT_DIR$/data/network" />
             <option value="$PROJECT_DIR$/feature" />
@@ -32,7 +35,9 @@
             <option value="$PROJECT_DIR$/feature/my" />
             <option value="$PROJECT_DIR$/feature/realies" />
             <option value="$PROJECT_DIR$/feature/search" />
+            <option value="$PROJECT_DIR$/feature/sign" />
             <option value="$PROJECT_DIR$/feature/subscribe" />
+            <option value="$PROJECT_DIR$/feature/viewer" />
             <option value="$PROJECT_DIR$/util" />
             <option value="$PROJECT_DIR$/util/common" />
             <option value="$PROJECT_DIR$/util/icon" />

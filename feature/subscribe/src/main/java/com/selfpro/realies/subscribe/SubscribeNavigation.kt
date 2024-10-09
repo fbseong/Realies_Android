@@ -7,21 +7,24 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.selfpro.realies.data.model.Route
 
 const val SubscribeRoute = "subscribe_route"
+private const val ScreenRoute = SubscribeRoute
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.subscribeScreen(
-    navHostController: NavHostController,
     enterTransition: @JvmSuppressWildcards() (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
+    route: Route
 ) {
-    composable(
-        route = SubscribeRoute,
-        enterTransition = enterTransition,
-        exitTransition = { null }
+    val router = route.RouteData(ScreenRoute)
 
+    composable(
+        route = router.route,
+        enterTransition = {route.slideTransition()},
+        exitTransition = { null }
     ) {
-        SubscribeScreen(navHostController)
+        SubscribeScreen(router)
     }
 }
 

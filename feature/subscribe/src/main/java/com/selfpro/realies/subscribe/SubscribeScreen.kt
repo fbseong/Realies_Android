@@ -20,7 +20,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,13 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import com.selfpro.network.request.RealiesRequest
-import com.selfpro.realies.common.NewsShimmerColumnItem
-import com.selfpro.realies.data.model.LoadState
-import com.selfpro.realies.feature.assests.news.NewsColumnLazyItem
-import com.selfpro.realies.shared.NetworkingViewModel
+import com.selfpro.realies.data.model.Route
 import com.selfpro.realies.util.common.SpColor
 import com.selfpro.realies.util.common.SpLog
 import com.selfpro.realies.util.icon.IcRealieslogo
@@ -46,20 +39,18 @@ import com.selfpro.realies.util.icon.SpIcon
 
 @Composable
 fun SubscribeScreen(
-    navHostController: NavHostController,
-    networkingViewModel: NetworkingViewModel = hiltViewModel()
+    router: Route.RouteData,
 ) {
-    SpLog.d("SubscribeScreen")
+    router.launched {
 
-//    val newsState by networkingViewModel.subscribeFlow.collectAsState()
-//    networkingViewModel.getRecommendationRealies(0)
+    }
 
     var selectedIndex by remember { mutableStateOf(-1) }
     val interactionSource = remember { MutableInteractionSource() }
 
     val items = listOf("test", "hello", "world", "mr", "my", "yesterday")
 
-    LazyColumn(modifier = Modifier.background(color = SpColor.White)) {
+    LazyColumn(modifier = Modifier.fillMaxSize().background(color = SpColor.White)) {
         item {
             Column(
                 modifier = Modifier

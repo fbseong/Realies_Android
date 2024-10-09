@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +30,7 @@ fun NewsCategory(){
 
     LazyRow(
         modifier = Modifier
+            .fillMaxWidth()
             .background(color = SpColor.White)
             .padding(vertical = 8.dp),
         contentPadding = PaddingValues(horizontal = 15.dp),

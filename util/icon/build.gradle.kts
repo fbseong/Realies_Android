@@ -15,11 +15,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":util:common"))
-//    implementation(libs.androidx.compose.ui)
-//    implementation(libs.androidx.compose.ui.tooling)
-
-    //    implementation(project(":util:shared"))
-//    implementation(project(":util:common"))
-//    implementation(project(":data:network"))
+    implementation(projects.util.common)
 }

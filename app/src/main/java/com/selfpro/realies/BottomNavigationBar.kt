@@ -30,9 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.selfpro.realies.add.AddRoute
 import com.selfpro.realies.data.model.NavData
-import com.selfpro.realies.realies.RealiesRoute
 import com.selfpro.realies.util.common.SpColor
 
 @Composable
@@ -41,12 +39,6 @@ fun BottomNavigationBar(
     navController: NavHostController,
     viewModel: MainViewModel = viewModel()
 ) {
-
-    navController.addOnDestinationChangedListener { _, destination, _ ->
-        viewModel.addNavigationQueue(destination.route?: RealiesRoute)
-
-        viewModel.handleBottomNavigationVisibility(destination.route != AddRoute)
-    }
 
     val bottomNavigationVisible by viewModel.bottomNavigationVisible.collectAsState()
 
@@ -85,7 +77,10 @@ fun BottomNavigationBar(
 
 @Composable
 fun BottomNavigationItem(
-    modifier: Modifier, navData: NavData, selectedNavData: MutableState<NavData>, navHostController: NavHostController
+    modifier: Modifier,
+    navData: NavData,
+    selectedNavData: MutableState<NavData>,
+    navHostController: NavHostController
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     Column(

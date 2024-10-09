@@ -40,19 +40,23 @@ import androidx.navigation.NavHostController
 import com.selfpro.network.request.RealiesRequest
 import com.selfpro.realies.common.CategoryItem
 import com.selfpro.realies.common.RealiesSearchBox
+import com.selfpro.realies.data.model.Route
 import com.selfpro.realies.feature.assests.news.NewsImageBox
 import com.selfpro.realies.shared.NetworkingViewModel
 import com.selfpro.realies.util.common.SpColor
+import com.selfpro.realies.util.common.SpLog
 import com.selfpro.realies.util.icon.IcRealieslogo
 import com.selfpro.realies.util.icon.SpIcon
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ChallengeScreen(
-    navHostController: NavHostController,
-    netWorkViewModel: NetworkingViewModel = hiltViewModel()
+    router: Route.RouteData
 ) {
+    router.launched {
 
+
+    }
 
 //    val newsState by netWorkViewModel.challengeFlow.collectAsState()
 //    netWorkViewModel.getRecommendationRealies(0)
@@ -77,7 +81,7 @@ fun ChallengeScreen(
                 )
             }
             RealiesSearchBox {
-                navHostController.navigate("realiesSearch")
+                router.controller.navigate("realiesSearch")
             }
         }
         stickyHeader {

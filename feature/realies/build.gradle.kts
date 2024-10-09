@@ -12,13 +12,15 @@ android {
     }
 }
 
-dependencies{
-    implementation(project(":util:shared"))
-    implementation(project(":data:model"))
-    implementation(project(":util:common"))
-    implementation(project(":data:network"))
-
-    implementation(project(":util:icon"))
-    implementation(project(":feature:search"))
-    implementation(project(":feature:common"))
+dependencies {
+    implementation(projects.util.shared)
+    implementation(projects.data.model)
+    implementation(projects.util.common)
+    implementation(projects.data.network)
+    implementation(projects.util.icon)
+    implementation(projects.feature.search)
+    implementation(projects.feature.common)
+    implementation(projects.data.domain)
+    implementation(projects.feature.viewer)
+    implementation(project(":data:datastore"))
 }

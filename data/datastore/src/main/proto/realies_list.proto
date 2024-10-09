@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.selfpro.realies.data.datastore";
+option java_multiple_files = true;
+
+message RealiesListPreference {
+    string title = 1;
+    string generatedTitle = 2;
+    string image = 3;
+    string url = 4;
+}

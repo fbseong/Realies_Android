@@ -1,12 +1,7 @@
 [versions]
-compileSdk = "34"
-minSdk = "31"
-targetSdk = "34"
-appVersion = "3.2.0"
-versionCode = "5"
-
 accompanistWebview = "0.24.13-rc"
 agp = "8.5.2"
+dataStore = "1.1.1"
 hiltAndroid = "2.51.1"
 hiltAndroidCompiler = "2.44"
 hiltNavigationCompose = "1.2.0"
@@ -29,17 +24,29 @@ jetbrainsKotlinJvm = "2.0.0"
 appcompat = "1.7.0"
 material = "1.12.0"
 ksp = "2.0.10-1.0.24"
-kotlinx-coroutines = "1.9.0-RC"
+kotlinxCoroutinesCore = "1.9.0-RC"
 kotlinx-collections-immutable = "0.3.7"
 accompanist = "0.36.0"
 gson = "2.10.1"
 orbitMvi = "6.0.0"
+protobuf = "3.23.0"
+protobufPlugin = "0.9.3"
+kotlinxCoroutines = "1.8.0"
+detekt = "1.23.1"
+ktlint = "11.5.0"
+
+compileSdk = "34"
+minSdk = "31"
+targetSdk = "34"
+appVersion = "3.2.0"
+versionCode = "5"
 
 [libraries]
 accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanistWebview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-compose-hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "dataStore" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -77,8 +84,13 @@ accompanist-navigation-animation = { group = "com.google.accompanist", name = "a
 accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }
 accompanist-swiperefresh = { group = "com.google.accompanist", name = "accompanist-swiperefresh", version.ref = "accompanist" }
 
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
+protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -90,6 +102,9 @@ google-android-libraries-mapsplatform-secrets-gradle-plugin = { id = "com.google
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 #Primitive Plugins
 realies-android-application = { id = "selfpro.realies.primitive.android.application", version = "unspecified" }
@@ -98,7 +113,7 @@ realies-android = { id = "selfpro.realies.primitive.android", version = "unspeci
 realies-android-kotlin = { id = "selfpro.realies.primitive.android.kotlin", version = "unspecified" }
 realies-android-compose = { id = "selfpro.realies.primitive.android.compose", version = "unspecified" }
 realies-android-library = { id = "selfpro.realies.primitive.android.library", version = "unspecified" }
-
+realies-android-gemini = { id = "selfpro.realies.primitive.android.gemini", version = "unspecified" }
 
 #Convention Plugins
 realies-android-feature = { id = "selfpro.realies.convention.android.feature", version = "unspecified" }

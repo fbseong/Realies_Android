@@ -14,20 +14,23 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.selfpro.realies.data.model.Route
 
 const val MyRoute = "my_route"
+private const val ScreenRoute = MyRoute
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.myScreen(
-    navHostController: NavHostController,
-    enterTransition: @JvmSuppressWildcards() (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
+    route: Route,
 ) {
+    val router = route.RouteData(ScreenRoute)
+
     composable(
-        route = MyRoute,
-        enterTransition =  enterTransition ,
+        route = ScreenRoute,
+        enterTransition = { route.slideTransition() },
         exitTransition = { null }
 
     ) {
-        MyScreen(navHostController)
+        MyScreen(router)
     }
 }

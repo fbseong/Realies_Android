@@ -12,11 +12,10 @@ android {
     }
 }
 
-dependencies{
-    implementation(project(":util:shared"))
-    implementation(project(":data:model"))
-    implementation(project(":data:network"))
-
-    implementation(project(":util:common"))
-    implementation(project(":util:icon"))
+dependencies {
+    implementation(projects.util.shared)
+    implementation(projects.data.model)
+    implementation(projects.data.network)
+    implementation(projects.util.common)
+    implementation(projects.util.icon)
 }

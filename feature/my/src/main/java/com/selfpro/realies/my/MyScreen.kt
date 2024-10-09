@@ -14,6 +14,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,13 +28,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.selfpro.realies.data.model.LaunchedModel
+import com.selfpro.realies.data.model.Route
 import com.selfpro.realies.util.common.SpColor
 import com.selfpro.realies.util.common.SpLog
 import com.selfpro.realies.util.icon.IcRealieslogo
 import com.selfpro.realies.util.icon.SpIcon
 
 @Composable
-fun MyScreen(navHostController: NavHostController) {
+fun MyScreen(router: Route.RouteData) {
+    router.launched {
+        SpLog.d(router.route)
+    }
+
     GuestScreen()
 }
 

@@ -15,8 +15,4 @@ android {
     }
 }
 
-dependencies{
-
-    implementation(project(":data:model"))
-    implementation(project(":data:network"))
-}
+dependencies{}
